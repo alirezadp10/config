@@ -1,9 +1,5 @@
 #!/bin/bash
 
-echo "hello $(whoami)";
-
-exit;
-
 URed='\033[4;31m';BRed='\033[1;31m';back_Red='\033[41m';
 UGreen='\033[4;32m';BGreen='\033[1;32m';back_Green='\033[42m';
 UYellow='\033[4;33m';BYellow='\033[1;33m';back_Yellow='\033[43m';
