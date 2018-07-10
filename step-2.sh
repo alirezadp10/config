@@ -1,18 +1,3 @@
-#
-enter these commands with roundcube user in /home/roundcube
-
---import pubkey.asc
-gpg --verify roundcubemail-1.2.2.tar.gz.asc
-
-
-enter this command with roundcube user in /home/roundcube/roundcubemail
-
-composer install --no-dev
-#
-
-
-
-
 #!/bin/bash
 
 echo "hello $(whoami)";
@@ -185,8 +170,6 @@ roundcube(){
     sudo chown -R roundcube:roundcube /home/roundcube;
 
     sudo chown www-data:www-data temp/ logs/ -R;
-
-
 
     mkdir ~/server_config/temp;
     cp ~/server_config/libs/nginx-sites-available ~/server_config/temp;
