@@ -5,7 +5,7 @@
 
 sudo apt-get update;
 sudo apt update;
-#sudo apt upgrade;
+sudo apt upgrade;
 sudo adduser sys_admin;
 sudo usermod -aG sudo sys_admin;
 sudo chown -R sys_admin:sys_admin /root/server_config;
