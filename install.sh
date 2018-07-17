@@ -1,9 +1,5 @@
 #!/bin/bash
 
-#ssh-keygen -f "/home/alirezadp10/.ssh/known_hosts" -R "188.40.166.176"
-#scp -r -P 22 Desktop/config root@188.40.166.176:~/
-
-
 source style.sh
 
 sudo apt-get update;
