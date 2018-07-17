@@ -43,89 +43,51 @@ press_any_key_to_continue(){
 }
 
 roundcube(){
-
     title "roundcube";
-
     do_you_want_continue;
     if [ $do_you_want_continue_response = "n" ]
     then
         return;
     fi
-
     sudo apt-get install postfix
-
-#    sudo sed -i "s/myhostname = /#myhostname = /g" /etc/postfix/main.cf;
-#    printf '\n%s\n' "myhostname = $domain" | sudo tee -a /etc/postfix/main.cf;
-
+    sudo sed -i "s/myhostname = /#myhostname = /g" /etc/postfix/main.cf;
+    printf '\n%s\n' "myhostname = $domain" | sudo tee -a /etc/postfix/main.cf;
     sudo sed -i "s/myorigin = /#myorigin = /g" /etc/postfix/main.cf;
     printf '\n%s\n' "myorigin = $domain" | sudo tee -a /etc/postfix/main.cf;
-
     sudo sed -i "s/mydestination = /#mydestination = /g" /etc/postfix/main.cf;
     printf '\n%s\n' "mydestination = mail.$domain, localhost.$domain, localhost, $domain" | sudo tee -a /etc/postfix/main.cf;
-
     sudo sed -i "s/mynetworks = /#mynetworks = /g" /etc/postfix/main.cf;
     printf '\n%s\n' "mynetworks= $ip_address 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128" | sudo tee -a /etc/postfix/main.cf;
-
     printf '\n%s\n' "home_mailbox = Maildir/new/mail" | sudo tee -a /etc/postfix/main.cf;
-
     sudo ufw allow Postfix;
-
     sudo apt-get install dovecot-core dovecot-imapd
-
     printf '\n%s\n' "protocols = imap" | sudo tee -a /etc/dovecot/dovecot.conf;
-
     sudo sed -i "s/#   mail_location = maildir:~\/Maildir/   mail_location = maildir:~\/Maildir/g" /etc/dovecot/conf.d/10-mail.conf;
-
     sudo sed -i "s/mail_location = mbox:~\/mail:INBOX=\/var\/mail\/%u/#mail_location = mbox:~\/mail:INBOX=\/var\/mail\/%u/g" /etc/dovecot/conf.d/10-mail.conf;
-
     sudo sed -i "s/#disable_plaintext_auth = yes/disable_plaintext_auth = no/g" /etc/dovecot/conf.d/10-auth.conf;
-
     sudo sed -i "s/auth_mechanisms = plain/auth_mechanisms = plain login/g" /etc/dovecot/conf.d/10-auth.conf;
-
     sudo sed -i ':a;N;$!ba;s/unix_listener auth-userdb {.*#group =\n  }/\tunix_listener auth-userdb {\n\t\t#mode = 0666\n\t\tuser = postfix\n\t\tgroup = postfix\n\t}/g' /etc/dovecot/conf.d/10-master.conf
-
     sudo systemctl restart dovecot.service;
-
     sudo adduser roundcube;
-
     cd /home/roundcube
-
     sudo apt install wget;
-
     sudo wget https://github.com/roundcube/roundcubemail/releases/download/1.2.2/roundcubemail-1.2.2.tar.gz;
-
     sudo chown -R roundcube:roundcube /home/roundcube;
-
     sudo wget https://roundcube.net/download/pubkey.asc;
-
     sudo chown -R roundcube:roundcube /home/roundcube;
-
     sudo wget https://github.com/roundcube/roundcubemail/releases/download/1.2.2/roundcubemail-1.2.2.tar.gz.asc;
-
     sudo chown -R roundcube:roundcube /home/roundcube;
-
     sudo tar xvf /home/roundcube/roundcubemail-1.2.2.tar.gz;
-
     sudo mv roundcubemail-1.2.2 roundcubemail;
-
     cd /home/roundcube/roundcubemail;
-
     sudo apt install composer;
-
     sudo mv composer.json-dist composer.json;
-
     cat ~/server_config/libs/rouncube-composer.json  | sudo tee composer.json;
-
     sudo apt-get install php7.2-mbstring;
-
     sudo apt-get install php7.2-gd;
-
     sudo apt-get install php7.2-curl;
-
     sudo apt-get install php7.2-zip;
-
     sudo apt install php-net-ldap2 php-net-ldap3;
-
     echo "";
     echo "";
     echo "";
@@ -140,18 +102,14 @@ roundcube(){
     echo "";
     echo "";
     echo "";
-
     echo -e "${BPurple}";
     echo -e "enter mysql password of root user:";
     echo -e "${NC}";
     mysql -u root -p
-
     echo -e "${BPurple}";
     echo -e "enter mysql password of root user:";
     echo -e "${NC}";
     mysql -u root -p roundcubemail < /home/roundcube/roundcubemail/SQL/mysql.initial.sql
-
-
     mkdir ~/server_config/temp;
     cp ~/server_config/libs/roundcube-config ~/server_config/temp;
     echo "enter mysql password of roundcube user:";
@@ -162,11 +120,8 @@ roundcube(){
     sudo mv ~/server_config/temp/roundcube-config ~/server_config/temp/config.inc.php
     sudo mv ~/server_config/temp/config.inc.php /home/roundcube/roundcubemail/config/
     rm -r ~/server_config/temp;
-
     sudo chown -R roundcube:roundcube /home/roundcube;
-
     sudo chown www-data:www-data temp/ logs/ -R;
-
     mkdir ~/server_config/temp;
     cp ~/server_config/libs/nginx-sites-available ~/server_config/temp;
     sed -i "s/root \/var\/www\/html/root \/home\/roundcube\/roundcubemail/g" ~/server_config/temp/nginx-sites-available;
@@ -181,7 +136,6 @@ roundcube(){
     sudo systemctl status nginx;
     press_any_key_to_continue;
     sudo certbot --nginx -d $domain -d mail.$domain
-
     echo "";
     echo "";
     echo "";
@@ -199,13 +153,8 @@ roundcube(){
     echo "";
     echo "";
     echo "";
-
-
-
     echo -e "${BGreen}Done!${NC}";
-
     press_any_key_to_continue;
-
 }
 
 ######################################

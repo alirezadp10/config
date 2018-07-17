@@ -9,6 +9,5 @@ sudo apt upgrade;
 sudo adduser sys_admin;
 sudo usermod -aG sudo sys_admin;
 sudo chown -R sys_admin:sys_admin /root/server_config;
-sudo mv /root/server_config /home/sys_admin;
-cd /home/sys_admin;
+sudo -u sys_admin bash packages.sh;
 su sys_admin;
