@@ -39,7 +39,7 @@ sudo mv roundcubemail-1.2.2 roundcubemail;
 cd /home/roundcube/roundcubemail;
 sudo apt install composer;
 sudo mv composer.json-dist composer.json;
-cat ~/config/libs/rouncube-composer.json  | sudo tee composer.json;
+cat "${DIR}/libs/rouncube-composer.json"  | sudo tee composer.json;
 sudo apt-get install php7.2-mbstring;
 sudo apt-get install php7.2-gd;
 sudo apt-get install php7.2-curl;
@@ -67,26 +67,26 @@ echo -e "${BPurple}";
 echo -e "enter mysql password of root user:";
 echo -e "${NC}";
 mysql -u root -p roundcubemail < /home/roundcube/roundcubemail/SQL/mysql.initial.sql
-mkdir ~/config/temp;
-cp ~/config/libs/roundcube-config ~/config/temp;
+mkdir "${DIR}/temp";
+cp "${DIR}/libs/roundcube-config" "${DIR}/temp";
 echo "enter mysql password of roundcube user:";
 read -r ROUNDCUEBPASSWORD;
-sed -i "s/ROUNDCUEBPASSWORD/$ROUNDCUEBPASSWORD/g" ~/config/temp/roundcube-config;
-sed -i "s/tls:\/\/mail.DOMAIN/tls:\/\/mail."$domain"/g" ~/config/temp/roundcube-config;
-sed -i "s/PRODUCT_NAME_VALUE/mail."$domain"/g" ~/config/temp/roundcube-config;
-sudo mv ~/config/temp/roundcube-config ~/config/temp/config.inc.php
-sudo mv ~/config/temp/config.inc.php /home/roundcube/roundcubemail/config/
-rm -r ~/config/temp;
+sed -i "s/ROUNDCUEBPASSWORD/$ROUNDCUEBPASSWORD/g" "${DIR}/temp/roundcube-config";
+sed -i "s/tls:\/\/mail.DOMAIN/tls:\/\/mail."$domain"/g" "${DIR}/temp/roundcube-config";
+sed -i "s/PRODUCT_NAME_VALUE/mail."$domain"/g" "${DIR}/temp/roundcube-config";
+sudo mv "${DIR}/temp/roundcube-config" "${DIR}/temp/config.inc.php"
+sudo mv "${DIR}/temp/config.inc.php" /home/roundcube/roundcubemail/config/
+rm -r "${DIR}/temp";
 sudo chown -R roundcube:roundcube /home/roundcube;
 sudo chown www-data:www-data temp/ logs/ -R;
-mkdir ~/config/temp;
-cp ~/config/libs/nginx-sites-available ~/config/temp;
-sed -i "s/root \/var\/www\/html/root \/home\/roundcube\/roundcubemail/g" ~/config/temp/nginx-sites-available;
-sed -i "s/server_name server_domain_or_IP/server_name mail.$domain/g" ~/config/temp/nginx-sites-available;
-sed -i "s/\/var\/log\/nginx\/error.log/\/var\/log\/nginx\/error-roundcube.log/g" ~/config/temp/nginx-sites-available;
-sed -i "s/\/var\/log\/nginx\/access.log/\/var\/log\/nginx\/access-roundcube.log/g" ~/config/temp/nginx-sites-available;
-sudo mv ~/config/temp/nginx-sites-available "/etc/nginx/sites-available/roundcube";
-rm -r ~/config/temp;
+mkdir "${DIR}/temp";
+cp "${DIR}/libs/nginx-sites-available" "${DIR}/temp";
+sed -i "s/root \/var\/www\/html/root \/home\/roundcube\/roundcubemail/g" "${DIR}/temp/nginx-sites-available";
+sed -i "s/server_name server_domain_or_IP/server_name mail.$domain/g" "${DIR}/temp/nginx-sites-available";
+sed -i "s/\/var\/log\/nginx\/error.log/\/var\/log\/nginx\/error-roundcube.log/g" "${DIR}/temp/nginx-sites-available";
+sed -i "s/\/var\/log\/nginx\/access.log/\/var\/log\/nginx\/access-roundcube.log/g" "${DIR}/temp/nginx-sites-available";
+sudo mv "${DIR}/temp/nginx-sites-available" "/etc/nginx/sites-available/roundcube";
+rm -r "${DIR}/temp";
 sudo ln -s "/etc/nginx/sites-available/roundcube" /etc/nginx/sites-enabled/
 printf '\n%s\n' "$ip_address mail.$domain" | sudo tee -a /etc/hosts;
 sudo systemctl restart nginx;

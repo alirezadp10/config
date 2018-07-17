@@ -7,6 +7,8 @@ read -r domain;
 echo -e "${BYellow}what is your ip address?${BRed}";
 read -r ip_address;
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )";
+
 while true
 do
     printf "\033c";
