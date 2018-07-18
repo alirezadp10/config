@@ -1,31 +1,30 @@
 #!/bin/bash
 
-source style.sh
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )";
+
+source "${DIR}/style.sh";
 
 sudo apt-get update;
 sudo apt update;
 sudo apt upgrade;
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )";
 
-echo -e "${BYellow}do you already have system administrator user? [Y/n]${BRed}";
+echo -e "${BYellow}do you have already system administrator user? [Y/n]${BRed}";
 read -r input;
 echo -e "${NC}";
 if [ $input = "y" ]
 then
-    echo -e "${BYellow}write your name of the user is system administrator: (ex: sys_admin)${BRed}";
+    echo -e "${BYellow}write your name of the user is system administrator: (ex: sammy)${BRed}";
     read -r admin;
     echo -e "${NC}";
-    sudo chown -R ${admin}:${admin} ${DIR};
-    printf "\033c";
-    sudo -u ${admin} bash "${DIR}/menu.sh";
 else
-    echo -e "${BYellow}write the name of user you want to be system administrator: (ex: sys_admin)${BRed}";
+    echo -e "${BYellow}write the name of user you want to be system administrator: (ex: sammy)${BRed}";
     read -r admin;
     echo -e "${NC}";
     sudo adduser ${admin};
-    sudo usermod -aG sudo ${admin};
-    sudo chown -R ${admin}:${admin} ${DIR};
-    printf "\033c";
-    sudo -u ${admin} bash "${DIR}/menu.sh";
 fi;
+
+printf "\033c";
+sudo usermod -aG sudo ${admin};
+sudo chown -R ${admin}:${admin} ${DIR};
+sudo -u ${admin} bash "${DIR}/menu.sh"

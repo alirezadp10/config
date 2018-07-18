@@ -41,3 +41,12 @@ press_any_key_to_continue(){
     read -n 1 -s -r -p "press any key to continue ...";
     echo -e "${NC}";
 }
+
+function ProgressBar {
+    let _progress=(${1}*100/100*100)/100
+    let _done=(${_progress}*10)/10
+    let _left=100-$_done
+    _fill=$(printf "%${_done}s")
+    _empty=$(printf "%${_left}s")
+    echo -ne " ${back_Green}${BGreen}${_fill// /_}${back_Yellow}${BYellow}${_empty// /_}${NC}  ${_progress}%\r"
+}

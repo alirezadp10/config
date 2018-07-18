@@ -17,6 +17,7 @@ echo "default server? [Y/n]";
 read -r default_server;
 if [ $default_server = "y" ]
 then
+    find /etc/nginx/sites-available -type f -name "*" -print0 | sudo xargs -0 sed -i "s/80 default_server/80/g"
     sed -i "s/80/80 default_server/g" "${DIR}/temp/nginx-sites-available";
 fi;
 sed -i "s/root \/var\/www\/html/root \/home\/$block_name/g" "${DIR}/temp/nginx-sites-available";

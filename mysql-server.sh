@@ -7,9 +7,7 @@ then
     return;
 fi
 
-if ! dpkg -s postfix > /dev/null; then
-    sudo apt-get install mysql-server;
-fi
+sudo apt-get install mysql-server;
 
 echo -e "${BGreen}Done!${NC}";
 press_any_key_to_continue;
