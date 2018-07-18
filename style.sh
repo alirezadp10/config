@@ -20,9 +20,10 @@ title(){
 do_you_want_continue(){
     while true
     do
-        echo -e "${BYellow}Do you want continue?[Y/n]${NC}";
+        echo -e "${BYellow}Do you want continue?[Y/n]${BRed}";
         eval do_you_want_continue_response=null;
         read -r do_you_want_continue_response;
+        echo "${NC}";
         if [ $do_you_want_continue_response = "y" ]
         then
             break;

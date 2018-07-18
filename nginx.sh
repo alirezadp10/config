@@ -18,8 +18,9 @@ sudo systemctl restart nginx;
 sudo systemctl status nginx;
 press_any_key_to_continue;
 
-echo "create server block?[Y/n]";
+echo -e "${BYellow}create server block?[Y/n]${BRed}";
 read -r input;
+echo -e "${NC}";
 if [ $input = "y" ]
 then
     source "${DIR}/server-block-for-nginx.sh";

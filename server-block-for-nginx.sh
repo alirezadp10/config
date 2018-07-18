@@ -6,15 +6,18 @@ if [ $do_you_want_continue_response = "n" ]
 then
     return;
 fi
-echo "What is the name of the block you want?";
+echo -e "${BYellow}What is the name of the block you want?${BRed}";
 read -r block_name;
+echo -e "${NC}";
 sudo adduser $block_name;
-echo "What is the name of block domain you want?";
+echo "${BYellow}What is the name of block domain you want?${BRed}";
 read -r block_domain;
+echo -e "${NC}";
 mkdir "${DIR}/temp";
 cp "${DIR}/libs/nginx-sites-available" "${DIR}/temp";
-echo "default server? [Y/n]";
+echo "${BYellow}default server? [Y/n]${BRed}";
 read -r default_server;
+echo -e "${NC}";
 if [ $default_server = "y" ]
 then
     find /etc/nginx/sites-available -type f -name "*" -print0 | sudo xargs -0 sed -i "s/80 default_server/80/g"
@@ -31,7 +34,5 @@ printf '\n%s\n' "$ip_address $block_domain www.$block_domain" | sudo tee -a /etc
 printf '%s' "hello from $block_name" | sudo tee -a "/home/$block_name/index.html";
 sudo systemctl restart nginx;
 sudo systemctl status nginx;
-echo -e "${BGreen}Done!${NC}";
-press_any_key_to_continue;
 echo -e "${BGreen}Done!${NC}";
 press_any_key_to_continue;
