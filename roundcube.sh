@@ -60,8 +60,8 @@ echo -e "";
 echo -e "";
 echo -e "";
 echo -e "${BYellow}";
-echo -e "enter mysql password of root user:";
-echo -e "${BRed}";
+echo -e "enter mysql password of ${BRed}root${BYellow} user:";
+echo -e "${NC}";
 mysql -u root -p
 echo -e "${BYellow}";
 echo -e "enter mysql password of ${BRed}root${BYellow} user:${BRed}";
@@ -69,7 +69,7 @@ mysql -u root -p roundcubemail < /home/roundcube/roundcubemail/SQL/mysql.initial
 echo -e "${NC}";
 mkdir "${DIR}/temp";
 cp "${DIR}/libs/roundcube-config" "${DIR}/temp";
-echo -e "${BYellow}enter mysql password of roundcube user:${BRed}";
+echo -e "${BYellow}enter mysql password of ${BRed}roundcube${BYellow} user:${BRed}";
 read -r ROUNDCUEBPASSWORD;
 echo -e "${NC}";
 sed -i "s/ROUNDCUEBPASSWORD/$ROUNDCUEBPASSWORD/g" "${DIR}/temp/roundcube-config";
