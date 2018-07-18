@@ -6,16 +6,16 @@ if [ $do_you_want_continue_response = "n" ]
 then
     return;
 fi
-echo -e "${BYellow}What is the name of the block you want?${BRed}";
+echo -e "${BYellow}what is the name of the block you want? (ex: alirezadp10)${BRed}";
 read -r block_name;
 echo -e "${NC}";
 sudo adduser $block_name;
-echo "${BYellow}What is the name of block domain you want?${BRed}";
+echo -e "${BYellow}what is the address of block? (ex: alirezadp10.ir)${BRed}";
 read -r block_domain;
 echo -e "${NC}";
 mkdir "${DIR}/temp";
 cp "${DIR}/libs/nginx-sites-available" "${DIR}/temp";
-echo "${BYellow}default server? [Y/n]${BRed}";
+echo -e "${BYellow}default server? [Y/n]${BRed}";
 read -r default_server;
 echo -e "${NC}";
 if [ $default_server = "y" ]

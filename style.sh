@@ -12,9 +12,9 @@ title(){
     echo -e "${BRed};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;";
     echo -e ";;;;;;;;;;;;;;;;;;;;;;;;;;;${BYellow}   $1    ${BRed};;;;;;;;;;;;;;;;;;;;;;;;;;;;";
     echo -e ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;${NC}";
-    echo "";
-    echo "";
-    echo "";
+    echo -e "";
+    echo -e "";
+    echo -e "";
 }
 
 do_you_want_continue(){
@@ -31,9 +31,9 @@ do_you_want_continue(){
         then
             break;
         fi
-        echo "";
+        echo -e "";
         echo -e "${BRed}invalid response${NC}";
-        echo "";
+        echo -e "";
     done
 }
 

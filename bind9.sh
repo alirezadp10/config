@@ -9,9 +9,9 @@ fi
 
 echo -e "${BYellow}what is your domain name?(ex: alirezadp10.ir)${BRed}";
 read -r domain;
-echo "${BYellow}what is your ip address?${BRed}";
+echo -e "${BYellow}what is your ip address?${BRed}";
 read -r ip_address;
-echo "${NC}";
+echo -e "${NC}";
 
 echo -e "${BYellow}append this text to /etc/bind/named.conf.local:${NC}";
 printf '\n%s\n' "zone \"$domain\" {" | sudo tee -a /etc/bind/named.conf.local;
