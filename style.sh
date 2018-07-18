@@ -23,7 +23,7 @@ do_you_want_continue(){
         echo -e "${BYellow}Do you want continue?[Y/n]${BRed}";
         eval do_you_want_continue_response=null;
         read -r do_you_want_continue_response;
-        echo "${NC}";
+        echo -e "${NC}";
         if [ $do_you_want_continue_response = "y" ]
         then
             break;

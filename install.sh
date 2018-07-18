@@ -7,6 +7,7 @@ source "${DIR}/style.sh";
 sudo apt-get update;
 sudo apt update;
 sudo apt upgrade;
+printf "\033c";
 
 
 echo -e "${BYellow}do you have already system administrator user? [Y/n]${BRed}";
