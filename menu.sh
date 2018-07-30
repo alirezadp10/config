@@ -5,11 +5,6 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )";
 
 source "${DIR}/style.sh";
 
-echo -e "${BYellow}what is your domain name?(ex: alirezadp10.ir)${BRed}";
-read -r domain;
-echo -e "${BYellow}what is your ip address?${BRed}";
-read -r ip_address;
-
 while true
 do
     printf "\033c";

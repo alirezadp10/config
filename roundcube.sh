@@ -6,6 +6,10 @@ if [ $do_you_want_continue_response = "n" ]
 then
     return;
 fi
+echo -e "${BYellow}what is your domain name?(ex: alirezadp10.ir)${BRed}";
+read -r domain;
+echo -e "${BYellow}what is your ip address?${BRed}";
+read -r ip_address;
 sudo apt-get install postfix
 sudo sed -i "s/myhostname = /#myhostname = /g" /etc/postfix/main.cf;
 printf '\n%s\n' "myhostname = $domain" | sudo tee -a /etc/postfix/main.cf;

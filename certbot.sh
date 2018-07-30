@@ -21,6 +21,9 @@ if ! dpkg -s python-certbot-nginx > /dev/null; then
     press_any_key_to_continue
 fi
 
+echo -e "${BYellow}What is the domain name you want to certificated?(ex: alirezadp10.ir)${BRed}";
+read -r domain;
+
 sudo certbot --nginx -d $domain -d www.$domain
 echo -e "${BGreen}Done!${NC}";
 press_any_key_to_continue;
